@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: PageView(
+        physics: new NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: <Widget>[
           FeedScreen(),
