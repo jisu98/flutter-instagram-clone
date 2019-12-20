@@ -22,7 +22,7 @@ class User {
       profileImageUrl:
           doc['profileImageUrl'] ?? 'https://i.redd.it/dmdqlcdpjlwz.jpg',
       email: doc['email'],
-      bio: doc['doc'] ?? '',
+      bio: doc['bio'] ?? '',
     );
   }
 }

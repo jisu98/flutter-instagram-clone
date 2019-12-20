@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/models/user_model.dart';
+import 'package:instagram_clone/screens/edit_profile_screen.dart';
 import 'package:instagram_clone/utilities/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -28,7 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           }
 
           User user = User.fromDoc(snapshot.data);
-          print(user.profileImageUrl);
 
           return ListView(
             children: <Widget>[
@@ -103,7 +103,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 200.0,
                             child: FlatButton(
                               color: Colors.blue,
-                              onPressed: () => print('Edit Profile'),
+                              onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => EditProfileScreen(user: user),
+                                ),
+                              ),
                               child: Text(
                                 'Edit Profile',
                                 style: TextStyle(
