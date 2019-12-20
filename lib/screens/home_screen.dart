@@ -8,6 +8,9 @@ import 'package:instagram_clone/screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String id = 'home_screen';
+  final String userId;
+
+  HomeScreen({this.userId});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -40,14 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: PageView(
-        physics: new NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: <Widget>[
           FeedScreen(),
           SearchScreen(),
           CreatePostScreen(),
           ActivityScreen(),
-          ProfileScreen(),
+          ProfileScreen(userId: widget.userId),
         ],
         onPageChanged: (int index) {
           setState(() {

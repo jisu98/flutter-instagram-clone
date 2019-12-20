@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/screens/feed_screen.dart';
+import 'package:instagram_clone/screens/home_screen.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
 
 class AuthService {
@@ -20,9 +20,9 @@ class AuthService {
         _firestore.collection('/users').document(signedInUser.uid).setData({
           'name': name,
           'email': email,
-          'profileImageUrl': '',
+          'profileImageUrl': null,
         });
-        Navigator.pushReplacementNamed(context, FeedScreen.id);
+        Navigator.pushReplacementNamed(context, HomeScreen.id);
       }
     } catch (e) {
       print('ERROR!!');
