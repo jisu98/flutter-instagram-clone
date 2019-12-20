@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/models/user_model.dart';
 import 'package:instagram_clone/services/database_service.dart';
 
@@ -15,6 +19,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   String _name = '';
   String _bio = '';
+  File _profileImage;
 
   @override
   void initState() {
@@ -23,12 +28,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bio = widget.user.bio;
   }
 
+  _handleImageFromGallery() async {
+    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if (imageFile != null) {
+      setState(() {
+        _profileImage = imageFile;
+      });
+    }
+  }
+
   _submit() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
       // Update user in database
-      final _profileImageUrl = null;
+      final _profileImageUrl = '';
       User user = User(
         id: widget.user.id,
         name: _name,
@@ -64,11 +78,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 children: <Widget>[
                   CircleAvatar(
                     radius: 60.0,
-                    backgroundImage:
-                        NetworkImage('https://i.redd.it/dmdqlcdpjlwz.jpg'),
+                    backgroundImage: widget.user.profileImageUrl.isEmpty
+                        ? AssetImage('assets/images/user_placeholder.jpg')
+                        : CachedNetworkImageProvider(
+                            widget.user.profileImageUrl),
                   ),
                   FlatButton(
-                    onPressed: () => print('Change profile image'),
+                    onPressed: _handleImageFromGallery,
                     child: Text(
                       'Change profile Image',
                       style: TextStyle(

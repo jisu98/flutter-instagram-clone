@@ -18,7 +18,7 @@ class AuthService {
         _firestore.collection('/users').document(signedInUser.uid).setData({
           'name': name,
           'email': email,
-          'profileImageUrl': null,
+          'profileImageUrl': '',
         });
         Navigator.pop(context);
       }

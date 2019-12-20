@@ -19,8 +19,7 @@ class User {
     return User(
       id: doc.documentID,
       name: doc['name'],
-      profileImageUrl:
-          doc['profileImageUrl'] ?? 'https://i.redd.it/dmdqlcdpjlwz.jpg',
+      profileImageUrl: doc['profileImageUrl'],
       email: doc['email'],
       bio: doc['bio'] ?? '',
     );
