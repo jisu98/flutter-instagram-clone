@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/models/user_model.dart';
 import 'package:instagram_clone/utilities/constants.dart';
 
@@ -8,5 +9,13 @@ class DatabaseService {
       'profileImageUrl': user.profileImageUrl,
       'bio': user.bio,
     });
+  }
+
+  static Future<QuerySnapshot> searchUser(String name) {
+    Future<QuerySnapshot> users = usersRef
+        .where('name', isGreaterThanOrEqualTo: name)
+        .where('name', isLessThanOrEqualTo: name + '\uf8ff')
+        .getDocuments();
+    return users;
   }
 }

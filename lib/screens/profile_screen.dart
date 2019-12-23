@@ -19,6 +19,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Center(
+          child: Text(
+            'Instagram',
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'Billabong',
+              fontSize: 35.0,
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: FutureBuilder(
         future: usersRef.document(widget.userId).get(),
